@@ -11,16 +11,28 @@ using EShop.Models;
 
 namespace EShop.Controllers
 {
+    /// <summary>
+    /// Main page Controller. Displays all Goods existing in db. Could sort, search, filter and more...
+    /// </summary>
     public class GoodsController : Controller
     {
         readonly IEshopRepository _repository;
 
+        /// <summary>
+        /// Set connection with db
+        /// </summary>
+        /// <param name="repo"></param>
         public GoodsController(IEshopRepository repo)
         {
             _repository = repo;
             ViewBag.Categories = GetCategories();
         }
 
+        /// <summary>
+        /// Just displays all Goods from db
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>View with all Goods</returns>
         public ActionResult List(GoodsModel model)
         {
             GetSort(model);
@@ -33,6 +45,11 @@ namespace EShop.Controllers
             return View("List", model);
         }
 
+        /// <summary>
+        /// Toogle Action wich can sort by id by asc and desc
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>View with sorted Goods</returns>
         public ActionResult ListById(GoodsModel model)
         {
             model.Sort = (SortModel)Session["Sort"];
@@ -57,6 +74,11 @@ namespace EShop.Controllers
             }
         }
 
+        /// <summary>
+        /// Toogle Action wich can sort by Name by asc and desc
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public ActionResult ListByName(GoodsModel model)
         {
             GetSort(model);
@@ -81,6 +103,11 @@ namespace EShop.Controllers
             }
         }
 
+        /// <summary>
+        /// Toogle Action wich can sort by Price by asc and desc
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public ActionResult ListByPrice(GoodsModel model)
         {
             GetSort(model);
@@ -105,6 +132,11 @@ namespace EShop.Controllers
             }
         }
 
+        /// <summary>
+        /// Action for Search Goods by name
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public ActionResult Search(GoodsModel model)
         {
             GetSort(model);
@@ -115,7 +147,12 @@ namespace EShop.Controllers
 
             return View("List", model);
         }
-
+        
+        /// <summary>
+        /// This action filters Goods by set parameters
+        /// </summary>
+        /// <param name="model">Model with all parametrs wich could be filtered</param>
+        /// <returns></returns>
         public List<Goods> Filters(GoodsModel model)
         {
             List<Goods> currFilter = _repository.Goods.Where(i => (model.Color == null || i.Color.ToUpper().Contains(model.Color.ToUpper()))
@@ -130,6 +167,11 @@ namespace EShop.Controllers
             return currFilter;
         }
 
+        /// <summary>
+        /// Method for Toogle current sort options
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="type"></param>
         public void ReverseToModel(GoodsModel model, string type)
         {
             switch (type)
@@ -186,6 +228,10 @@ namespace EShop.Controllers
             }
         }
 
+        /// <summary>
+        /// Load Categories from db
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<SelectListItem> GetCategories()
         {
             return _repository.Categories.Select(
@@ -197,6 +243,10 @@ namespace EShop.Controllers
                 }).ToList();
         }
 
+        /// <summary>
+        /// Set or get current Sort parametrs from session
+        /// </summary>
+        /// <param name="model"></param>
         private void GetSort(GoodsModel model)
         {
             SortModel sess = (SortModel)Session["Sort"];

@@ -9,6 +9,9 @@ using EShop.Domain.Interfaces;
 
 namespace EShop.Domain.Context
 {
+    /// <summary>
+    /// Implementation of IEShopRepository
+    /// </summary>
     public class EFEshopRepository : IEshopRepository
     {
         EFDbContext context = new EFDbContext();

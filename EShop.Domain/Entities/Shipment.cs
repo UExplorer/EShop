@@ -7,6 +7,9 @@ using EShop.Domain.Identity;
 
 namespace EShop.Domain.Entities
 {
+    /// <summary>
+    /// Class represents Shipment entity and used for creating db-table "Shipments"
+    /// </summary>
     public class Shipment
     {
         public int Id { get; set; }

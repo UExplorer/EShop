@@ -256,7 +256,6 @@
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\UserOrderController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
-    <Compile Include="Exceptions\NotFoundEx.cs" />
     <Compile Include="Exceptions\NullIdException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -9,23 +9,39 @@ using EShop.Domain.Interfaces;
 
 namespace EShop.Areas.Administration.Controllers
 {
+    /// <summary>
+    /// Controller for creating and editing Goods. Available only for users with Admin Role
+    /// </summary>
     [Authorize(Roles = "Admin")]
     public class AdminGoodsController : Controller
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         IEshopRepository _repository;
 
+        /// <summary>
+        /// Basic constuctor for current controller. Set connection with database and load Categories from it.
+        /// </summary>
+        /// <param name="repo"></param>
         public AdminGoodsController(IEshopRepository repo)
         {
             _repository = repo;
             ViewBag.Categories = _repository.Categories.ToList();
         }
 
+        /// <summary>
+        /// Displays all Goods from db into View
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View(_repository.Goods.ToList());
         }
 
+        /// <summary>
+        /// Return View for Goods item with specific id
+        /// </summary>
+        /// <param name="id">id number in Goods table</param>
+        /// <returns></returns>
         public ViewResult Edit(int id)
         {
             Goods goods = _repository.Goods
@@ -49,6 +65,11 @@ namespace EShop.Areas.Administration.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Edit Goods item if it data is validated
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Edit(AdminGoodsModel model)
         {
@@ -57,13 +78,14 @@ namespace EShop.Areas.Administration.Controllers
                 
                 if (model.Picture != null)
                 {
-                    // получаем имя файла
+                    // Get file name
                     string fileName = System.IO.Path.GetFileName(model.Picture.FileName);
-                    // сохраняем файл в папку Files в проекте
+                    // Saving to Content folder
                     model.Picture.SaveAs(Server.MapPath("~/Content/" + fileName));
                     model.PictrureName = fileName;
                 }
 
+                // Set standart image for Goods without image
                 if (model.PictrureName == string.Empty) model.PictrureName = "No_image_available.png";
 
                 Goods goods = new Goods()
@@ -81,6 +103,7 @@ namespace EShop.Areas.Administration.Controllers
                     Price = model.Price
                 };
 
+                // Saving current item and adding record to log file
                 _repository.SaveGoods(goods);
                 logger.Info($"User {User.Identity.Name} have changed Goods by id: {goods.Id}");
 
@@ -92,11 +115,20 @@ namespace EShop.Areas.Administration.Controllers
             }
         }
 
+        /// <summary>
+        /// Returns View for adding new item to db
+        /// </summary>
+        /// <returns></returns>
         public ViewResult Create()
         {
             return View("Edit", new AdminGoodsModel());
         }
 
+        /// <summary>
+        /// Delete Goods from db with specific id
+        /// </summary>
+        /// <param name="Id">Id of Goods item in db</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Delete(int Id)
         {

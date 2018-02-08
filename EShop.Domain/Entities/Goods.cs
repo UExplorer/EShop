@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace EShop.Domain.Entities
 {
+    /// <summary>
+    /// Class represents Goods entity and used for creating db-table "Goods"
+    /// </summary>
     public class Goods
     {
         public int Id { get; set; }

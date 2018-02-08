@@ -11,6 +11,9 @@ using Microsoft.Owin;
 
 namespace EShop.Domain.Identity
 {
+    /// <summary>
+    /// Class whose implemented UserManager for current application needs 
+    /// </summary>
     public class AppUserManager : UserManager<AppUser>
     {
         public AppUserManager(IUserStore<AppUser> store)
@@ -18,6 +21,12 @@ namespace EShop.Domain.Identity
         {
         }
 
+        /// <summary>
+        /// Creating new AppUserManager for application using Owin
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="context">OwinContext of application</param>
+        /// <returns></returns>
         public static AppUserManager Create(
             IdentityFactoryOptions<AppUserManager> options, IOwinContext context)
         {

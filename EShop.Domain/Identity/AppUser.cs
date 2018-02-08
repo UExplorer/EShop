@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EShop.Domain.Identity
 {
+    /// <summary>
+    /// Class whose implemented IdentityUser for current application needs 
+    /// </summary>
     public class AppUser : IdentityUser
     {
         public bool IsEnabled { get; set; }

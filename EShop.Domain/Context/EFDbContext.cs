@@ -12,6 +12,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EShop.Domain.Context
 {
+    /// <summary>
+    /// Context class wich creating basic Entities into database and fills it with set default data 
+    /// </summary>
     public class EFDbContext : IdentityDbContext<AppUser>
     {
         public DbSet<Goods> Goods { get; set; }
@@ -22,12 +25,18 @@ namespace EShop.Domain.Context
         public DbSet<Shipment> Shipments { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
+        /// <summary>
+        /// Set initializer for specified connection
+        /// </summary>
         public EFDbContext(): base("DefaultConnection") 
         {
             Database.SetInitializer<EFDbContext>(new EshopDBInitializer()); 
         }
     }
 
+    /// <summary>
+    /// Initializer with defaul data for database
+    /// </summary>
     public class EshopDBInitializer : DropCreateDatabaseAlways<EFDbContext>
     {
         protected override void Seed(EFDbContext context)

@@ -15,6 +15,9 @@ using Microsoft.Owin.Security;
 
 namespace EShop.Areas.Administration.Controllers
 {
+    /// <summary>
+    /// Class for manipulating Users state. Available only for Users in Admin and Moderator Roles
+    /// </summary>
     [Authorize(Roles = "Admin,Moderator")]
     public class AdminUsersController : Controller
     {
@@ -24,9 +27,14 @@ namespace EShop.Areas.Administration.Controllers
         public void AdminUserController()
         {
         }
-        // GET: Administration/AdminUsers
+        
+        /// <summary>
+        /// Displays list of all users registred in application
+        /// </summary>
+        /// <returns>View with list of users</returns>
         public ActionResult Index()
         {
+            //Arrange 
             List<AdminUsersModel> model = new List<AdminUsersModel>();
             var users = HttpContext.GetOwinContext().GetUserManager<AppUserManager>().Users.ToList();
 
@@ -49,6 +57,11 @@ namespace EShop.Areas.Administration.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Toogle method wich enabling/disabling User with specific id
+        /// </summary>
+        /// <param name="id">Id of User from db</param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Disable(string id)
         {

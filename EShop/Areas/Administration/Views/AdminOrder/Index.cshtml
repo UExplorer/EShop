@@ -42,7 +42,7 @@
                         </td>
                         <td>
                             <div class="row justify-content-around">
-                                @using (Html.BeginForm("Index", "AdminOrder", FormMethod.Post, new { @class = "form-inline" }))
+                                @using (Html.BeginForm("ChangeStatus", "AdminOrder", FormMethod.Post, new { @class = "form-inline" }))
                                 {
                                     var d = ViewBag.List as List<SelectListItem>;
                                     d[order.OrderStatus - 1].Selected = true;

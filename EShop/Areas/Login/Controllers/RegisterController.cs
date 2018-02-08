@@ -13,19 +13,33 @@ using Microsoft.Owin.Security;
 
 namespace EShop.Areas.Login.Controllers
 {
+    /// <summary>
+    /// Controller for Registration new Users in app
+    /// </summary>
     public class RegisterController : Controller
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
+        /// <summary>
+        /// Action wich return registration form
+        /// </summary>
+        /// <returns>View with inputs for register</returns>
         public ActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Creating new User if for validated
+        /// </summary>
+        /// <param name="model">List of inputs. Type RegisterModel</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult CreateUser(RegisterModel model)
         {
+            // Creating new instance of AppUser
             AppUser newUser = new AppUser();
+
             if (ModelState.IsValid)
             {
                 newUser.UserName = model.Name;
@@ -40,9 +54,11 @@ namespace EShop.Areas.Login.Controllers
                 return View("Index",model);
             }
 
+            // Get Usermanager and AuthManager
             var userManager = HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
             var authManager = HttpContext.GetOwinContext().Authentication;
 
+            // Trying to create User With current data
             var res = userManager.Create(newUser, model.Password);
             if (res.Succeeded)
             {

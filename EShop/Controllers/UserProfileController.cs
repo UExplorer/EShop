@@ -11,17 +11,30 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace EShop.Controllers
 {
+    /// <summary>
+    /// Controller for editin info of current User profile
+    /// </summary>
     public class UserProfileController : Controller
     {
         private IEshopRepository _repository;
+
+        /// <summary>
+        /// Set connection to db
+        /// </summary>
+        /// <param name="repo"></param>
         public UserProfileController(IEshopRepository repo)
         {
             _repository = repo;
             ViewBag.Categories = _repository.Categories.ToList();
         }
 
+        /// <summary>
+        /// Display current info of logged User
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
+            // Arrange
             AppUserManager userManager = HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
             var currUsName = HttpContext.GetOwinContext().Authentication.User.Identity.Name;
             var user = userManager.Users.FirstOrDefault(u =>
@@ -29,6 +42,7 @@ namespace EShop.Controllers
             var shipment = _repository.Shipments.ToList();
             RegisterModel model = new RegisterModel();
 
+            // We should find our User ;)
             if (user != null)
             {
                 model.Name = user.UserName;

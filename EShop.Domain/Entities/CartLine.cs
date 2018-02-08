@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace EShop.Domain.Entities
 {
+    /// <summary>
+    /// Class represents CartLine entity. It need for proper work of Cart module. Contains Goods and it Quantity in the Cart.
+    /// </summary>
     public class CartLine
     {
         public int Id { get; set; }

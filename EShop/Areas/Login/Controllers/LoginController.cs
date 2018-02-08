@@ -12,10 +12,17 @@ using Microsoft.Owin.Security;
 
 namespace EShop.Areas.Login.Controllers
 {
+    /// <summary>
+    /// Controller responsible for authorizing and authenticating Users 
+    /// </summary>
     public class LoginController : Controller
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
+        /// <summary>
+        /// Index Action of Controller
+        /// </summary>
+        /// <returns>View for Login into the system</returns>
         public ActionResult Index()
         {
             var url = string.Empty;
@@ -26,6 +33,11 @@ namespace EShop.Areas.Login.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Authentication of User 
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns>redirect to main page or redirect to last url</returns>
         [HttpPost]
         public ActionResult Login(LoginViewModel login)
         {
@@ -57,6 +69,10 @@ namespace EShop.Areas.Login.Controllers
             return View(login);
         }
 
+        /// <summary>
+        /// SingOut of current user
+        /// </summary>
+        /// <returns>redirect to main page</returns>
         [HttpGet]
         public ActionResult SingOut()
         {
