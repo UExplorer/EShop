@@ -27,7 +27,7 @@
                         @Html.ActionLink("Подробнее", "Index", "Item", new {id = p.Id}, new {@class = "btn btn-primary"})
                         @if (p.AvailableCount > 0)
                         {
-                            using (Html.BeginForm("Add", "Cart", FormMethod.Post))
+                            using (Html.BeginForm("Add", "Cart", FormMethod.Post, new {@class="form-inline"}))
                             {
                                 @Html.Hidden("id", p.Id)
                                 @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
@@ -36,7 +36,7 @@
                         }
                         else
                         {
-                            <a href="#" class="btn btn-danger">Нет в наличии</a>
+                            <a href="#" class="btn btn-danger mt-1">Нет в наличии</a>
                         }
                     </div>
                 </div>

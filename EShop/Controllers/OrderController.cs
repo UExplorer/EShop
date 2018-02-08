@@ -17,6 +17,7 @@ namespace EShop.Controllers
 {
     public class OrderController : Controller
     {
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         private IEshopRepository _repository;
 
         public OrderController(IEshopRepository repo)
@@ -79,6 +80,7 @@ namespace EShop.Controllers
                 _repository.SaveOrder(order);
                 SendNotification(user);
                 HttpContext.Session["Cart"] = null;
+                logger.Info($"Registred new order from user:{userName}");
                 return View();
             }
 
@@ -97,6 +99,7 @@ namespace EShop.Controllers
             smtp.Credentials = new NetworkCredential("gemlont@gmail.com", "v3r8o5e8");
             smtp.EnableSsl = true;
             smtp.Send(message);
+            logger.Info("Messege about new order successfully send to Admin mail");
         }
     }
 }

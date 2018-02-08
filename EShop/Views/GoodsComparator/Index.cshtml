@@ -55,10 +55,32 @@
         </tr>
         <tr>
             <th>
-                @Html.DisplayNameFor(m => m.Item2.Price)
+                @Html.DisplayNameFor(m=>m.Item1.Price)
             </th>
             <td>
+                @Html.DisplayFor(m => m.Item1.Price)
+            </td>
+            <td>
                 @Html.DisplayFor(m => m.Item2.Price)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                
+            </th>
+            <td>
+                @using (Html.BeginForm("DeleteItem", "GoodsComparator", FormMethod.Post))
+                {
+                    <input type="hidden" name="position" value="1"/>
+                    <input type="submit" value="Удалить"/>
+                }
+            </td>
+            <td>
+                @using (Html.BeginForm("DeleteItem", "GoodsComparator", FormMethod.Post))
+                {
+                    <input type="hidden" name="position" value="2" />
+                    <input type="submit" value="Удалить" />
+                }
             </td>
         </tr>
 

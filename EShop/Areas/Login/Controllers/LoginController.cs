@@ -14,7 +14,8 @@ namespace EShop.Areas.Login.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login/Login
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         public ActionResult Index()
         {
             var url = string.Empty;
@@ -42,6 +43,7 @@ namespace EShop.Areas.Login.Controllers
                             DefaultAuthenticationTypes.ApplicationCookie);
                         authManager.SignIn(
                             new AuthenticationProperties {IsPersistent = false}, ident);
+                        logger.Info($"User: {user.UserName} is autorised");
                         return Redirect(login.ReturnUrl ?? Url.Action("List", "Goods", new {Areas = ""}, null));
                     }
                     else
@@ -58,6 +60,7 @@ namespace EShop.Areas.Login.Controllers
         [HttpGet]
         public ActionResult SingOut()
         {
+            if(User!=null) logger.Info($"User {User.Identity.Name} is SingOut");
             HttpContext.GetOwinContext().Authentication.SignOut();
             return Redirect("~/Goods/List");
         }

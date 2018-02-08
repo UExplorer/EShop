@@ -5,11 +5,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EShop.Domain.Entities;
-using EShop.Domain.Identity;
 
-namespace EShop.Areas.Administration.Models
+namespace EShop.Models
 {
-    public class AdminOrderModel
+    public class OrderViewModel
     {
         [Display(Name = "Номер заказа")]
         public int OrderId { get; set; }
@@ -33,6 +32,6 @@ namespace EShop.Areas.Administration.Models
         public static SelectList List { get; set; }
 
         [Display(Name = "Статус заказа")]
-        public int OrderStatus { get; set; }
+        public Status OrderStatus { get; set; }
     }
 }

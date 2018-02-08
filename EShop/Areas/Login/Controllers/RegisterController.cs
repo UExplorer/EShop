@@ -15,6 +15,8 @@ namespace EShop.Areas.Login.Controllers
 {
     public class RegisterController : Controller
     {
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         public ActionResult Index()
         {
             return View();
@@ -49,6 +51,7 @@ namespace EShop.Areas.Login.Controllers
                 userManager.AddToRole(newUser.Id, "User");
                 authManager.SignIn(
                     new AuthenticationProperties { IsPersistent = false }, ident);
+                logger.Info($"New user ({newUser.UserName}) is reggistred");
             }
             else
             {

@@ -32,7 +32,7 @@ namespace EShop.Areas.Login.Models
 
         [Required]
         [Display(Name = "Мобильный телефон")]
-        [RegularExpression(@"[+][0-9]{2}+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Это не корректный номер телефона")]
+
         public string PhoneNumber { get; set; }
     }
 }

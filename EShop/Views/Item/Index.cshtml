@@ -20,11 +20,11 @@
             }
 
             <div class="input-group">
-                @Html.DisplayNameFor(m => m.AvailableCount)
+                В наличии: 
                 @Html.DisplayFor(m => m.AvailableCount)
             </div>
             <div class="input-group">
-                @Html.DisplayNameFor(m => m.Description)
+                Описание: 
                 @Html.DisplayFor(m => m.Description)
             </div>
 
@@ -32,7 +32,7 @@
                 <tbody>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(m => m.Name)
+                        Название:
                     </th>
                     <td>
                         @Html.DisplayFor(m => m.Name)
@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(m => m.Category)
+                        Категория:
                     </th>
                     <td>
                         @Html.DisplayFor(m => m.Category.Name)
@@ -48,7 +48,7 @@
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(m => m.Color)
+                        Цвета:
                     </th>
                     <td>
                         @Html.DisplayFor(m => m.Color)
@@ -56,7 +56,7 @@
                 </tr>
                 <tr>
                     <th>
-                        Габариты
+                        Габариты:
                     </th>
                     <td>
                         @Html.Display($"{Model.Length}x{Model.Width}x{Model.Height}")
@@ -64,7 +64,7 @@
                 </tr>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(m => m.Price)
+                        Цена:
                     </th>
                     <td>
                         @Html.DisplayFor(m => m.Price)

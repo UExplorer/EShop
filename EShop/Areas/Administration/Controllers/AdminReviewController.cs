@@ -13,6 +13,7 @@ namespace EShop.Areas.Administration.Controllers
     [Authorize(Roles = "Admin,Moderator")]
     public class AdminReviewController : Controller
     {
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         private IEshopRepository _repository;
 
         public AdminReviewController(IEshopRepository repo)
@@ -30,6 +31,7 @@ namespace EShop.Areas.Administration.Controllers
         public ActionResult DeleteReview(int id)
         {
             _repository.DeleteReview(id);
+            logger.Info($"User {User.Identity.Name} have deleted Review");
 
             return View("Index",_repository.Reviews.ToList());
         }

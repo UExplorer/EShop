@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EShop.Areas.Administration.Models;
+using EShop.Domain.Entities;
 using EShop.Domain.Interfaces;
+using EShop.Models;
 
 namespace EShop.Controllers
 {
@@ -24,7 +27,22 @@ namespace EShop.Controllers
             var orders = _repository.Orders.Where(o => o.User == currentUser).ToList();
             var cartLines = _repository.CartLines.ToList();
             var status = _repository.Statuses.ToList();
-            return View(orders);
+
+            List<OrderViewModel> model = new List<OrderViewModel>();
+            foreach (Order order in orders)
+            {
+                model.Add(new OrderViewModel()
+                {
+                    Date = order.Date,
+                    OrderCart = order.OrderCart,
+                    OrderId = order.Id,
+                    OrderStatus = order.OrderStatus,
+                    Shipment = order.Shipment,
+                    User = order.User
+                });
+            }
+
+            return View(model);
         }
 
         [HttpPost]

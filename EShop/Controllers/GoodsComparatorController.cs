@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EShop.Domain.Interfaces;
+using EShop.Exceptions;
 using EShop.Models;
 
 namespace EShop.Controllers
@@ -17,6 +18,7 @@ namespace EShop.Controllers
             _repository = repo;
         }
 
+        [NullIdException]
         public ActionResult Index(int? id)
         {
             CompareModel model = GetCompare();
@@ -26,6 +28,7 @@ namespace EShop.Controllers
             if (Request.UrlReferrer != null) url = HttpContext.Request.UrlReferrer.AbsolutePath;
             else url = "~/Goods/List";
             model.ReturnUrl = url;
+
             if (model.Item1 == null)
             {
                 model.Item1 = goods;
@@ -52,6 +55,24 @@ namespace EShop.Controllers
                 TempData["UserMess"] = "Товар успешно добавлен в очередь для сравнения, добавьте еще один товар для сравнения";
                 return RedirectToAction("Index","Item", new {id=id});
             }
+        }
+
+        [NullIdException]
+        public RedirectToRouteResult DeleteItem(int position)
+        {
+            CompareModel model = GetCompare();
+            switch (position)
+            {
+                case 1:
+                    model.Item1 = null;
+                    break;
+
+                case 2:
+                    model.Item2 = null;
+                    break;
+            }
+
+            return RedirectToAction("List", "Goods");
         }
 
         private CompareModel GetCompare()

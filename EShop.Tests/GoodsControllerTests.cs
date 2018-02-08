@@ -296,5 +296,8 @@ namespace EShop.Tests
             // Assert
             Assert.AreNotEqual(expected, result);
         }
+
+        [TestMethod]
+        public void 
     }
 }

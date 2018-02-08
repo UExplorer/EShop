@@ -9,9 +9,10 @@ using EShop.Domain.Interfaces;
 
 namespace EShop.Areas.Administration.Controllers
 {
-    [Authorize(Roles = "Admin,Moderator")]
+    [Authorize(Roles = "Admin")]
     public class AdminGoodsController : Controller
     {
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         IEshopRepository _repository;
 
         public AdminGoodsController(IEshopRepository repo)
@@ -78,9 +79,12 @@ namespace EShop.Areas.Administration.Controllers
                     Width = model.Width,
                     Pictrure = model.PictrureName,
                     Price = model.Price
-            };
+                };
+
                 _repository.SaveGoods(goods);
-                 return RedirectToAction("Index");
+                logger.Info($"User {User.Identity.Name} have changed Goods by id: {goods.Id}");
+
+                return RedirectToAction("Index");
             }
             else
             {
@@ -96,6 +100,7 @@ namespace EShop.Areas.Administration.Controllers
         [HttpPost]
         public ActionResult Delete(int Id)
         {
+            logger.Info($"User {User.Identity.Name} have deleted Goods with name: {_repository.Goods.First(g=>g.Id==Id).Name}");
             _repository.DeleteGoods(Id);
             return RedirectToAction("Index");
         }

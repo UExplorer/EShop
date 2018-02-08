@@ -32,6 +32,8 @@ namespace EShop.Controllers
             if (user != null)
             {
                 model.Name = user.UserName;
+                model.Email = user.Email;
+                model.PhoneNumber = user.PhoneNumber;
                 return View(model);
             }
 

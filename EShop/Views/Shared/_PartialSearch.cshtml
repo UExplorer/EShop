@@ -5,13 +5,10 @@
     Model.Sort = (SortModel) Session["Sort"];
 }
 
-<div class="container row bg-dark">
-    @using (Html.BeginForm("Search", "Goods", FormMethod.Post))
+<div class="container offset-4 bg-dark justify-content-center mt-2">
+    @using (Html.BeginForm("Search", "Goods", FormMethod.Post, new { @class="form-inline" }))
     {
-        @Html.TextBoxFor(m => m.Name)
-        <input type="submit" value="Поиск" class="btn-default" />
+        @Html.TextBoxFor(m => m.Name, new { @class= "form-control col-4"})
+        <input type="submit" value="Поиск" class="btn btn-default" />
     }
 </div>
-
-<script src="~/Scripts/jquery-3.0.0.min.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

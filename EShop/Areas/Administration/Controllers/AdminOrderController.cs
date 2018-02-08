@@ -10,9 +10,10 @@ using EShop.Domain.Interfaces;
 
 namespace EShop.Areas.Administration.Controllers
 {
-    [Authorize(Roles = "Admin,Moderator")]
+    [Authorize(Roles = "Admin")]
     public class AdminOrderController : Controller
     {
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         private IEshopRepository _repository;
 
         public AdminOrderController(IEshopRepository repo)
@@ -54,8 +55,12 @@ namespace EShop.Areas.Administration.Controllers
         { 
             var status = _repository.Statuses.First(s=>s.Id == statusId);
             var result = _repository.Orders.First(c => c.Id == orderId);
+
             result.OrderStatus = status;
             _repository.SaveOrder(result);
+
+            logger.Info($"User {User.Identity.Name} have changed status of order by id: {orderId}");
+
             return RedirectToAction("Index");
         }
 

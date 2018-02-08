@@ -18,6 +18,7 @@ namespace EShop.Areas.Administration.Controllers
     [Authorize(Roles = "Admin,Moderator")]
     public class AdminUsersController : Controller
     {
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         private UserManager<AppUser> manager;
 
         public void AdminUserController()
@@ -52,10 +53,12 @@ namespace EShop.Areas.Administration.Controllers
         public ActionResult Disable(string id)
         {
             manager = HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
-            var disable = manager.Users.First(u=>u.Id==id);
-            disable.IsEnabled = !disable.IsEnabled;
-            manager.Update(disable);
-            return View("Index",manager.Users.ToList());
+            var changeEnable = manager.Users.First(u=>u.Id==id);
+            changeEnable.IsEnabled = !changeEnable.IsEnabled;
+            manager.Update(changeEnable);
+            logger.Info($"User {User.Identity.Name} have changed user's ({changeEnable.UserName}) state");
+
+            return View("Index");
         }
     }
 
