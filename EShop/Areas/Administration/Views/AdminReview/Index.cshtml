@@ -1,0 +1,29 @@
+﻿@using EShop.Domain.Entities
+@model List<Review>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administration/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    @foreach (Review review in Model)
+    {
+        <div class="row">
+            @using (Html.BeginForm("DeleteReview", "AdminReview", FormMethod.Post))
+            {
+                @Html.DisplayFor(r=> review.Author)
+                @Html.DisplayFor(r=> review.DateTime)
+                @Html.DisplayFor(r=> review.Text)
+                @Html.DisplayFor(r=> review.Goods.Name)
+                <input type="hidden" name="id" value="@review.Id"/>
+                <input type="submit" value="Удалить отзыв"/>
+            }
+            @using (Html.BeginForm("Reply", "AdminReview", FormMethod.Post))
+            {
+                <input type="hidden" name="userName" value="@review.Author"/>
+                <input type="submit" value="Ответить"/>
+            }
+        </div>
+    }
+</div>

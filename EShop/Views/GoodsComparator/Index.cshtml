@@ -1,0 +1,67 @@
+﻿@using EShop.Domain.Entities
+@model EShop.Models.CompareModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="margin-top: 30px;">
+    <table class="table table-bordered" style="margin-top: 50px;">
+        <tbody>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(m => m.Item1.Name)
+            </th>
+            <td>
+                @Html.DisplayFor(m => m.Item1.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.Item2.Name)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(m => m.Item1.Category)
+            </th>
+            <td>
+                @Html.DisplayFor(m => m.Item1.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.Item2.Category.Name)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(m => m.Item1.Color)
+            </th>
+            <td>
+                @Html.DisplayFor(m => m.Item1.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.Item2.Color)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Габариты
+            </th>
+            <td>
+                @Html.Display($"{Model.Item1.Length}x{Model.Item1.Width}x{Model.Item1.Height}")
+            </td>
+            <td>
+                @Html.Display($"{Model.Item2.Length}x{Model.Item2.Width}x{Model.Item2.Height}")
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(m => m.Item2.Price)
+            </th>
+            <td>
+                @Html.DisplayFor(m => m.Item2.Price)
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>

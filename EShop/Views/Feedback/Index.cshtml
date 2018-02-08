@@ -1,0 +1,27 @@
+﻿@model EShop.Models.FeedbackModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container justify-content-center col col-4">
+    <div class="" style="margin-top: 120px;">
+        @using (Html.BeginForm("SendMail", "Feedback", FormMethod.Post))
+        {
+            <div class="input-group mb-4">
+                @Html.TextBoxFor(m=>m.From, new { @class = "form-control", placeholder = "От кого (ваш email)" })
+                @Html.ValidationMessageFor(m=>m.From)
+            </div>
+            <div class="input-group mb-4">
+                @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", placeholder = "Тема сообщения" })
+                @Html.ValidationMessageFor(m => m.Subject)
+            </div>
+            <div class="input-group mb-4">
+                @Html.TextAreaFor(m => m.TextBody, new { @class = "form-control", placeholder = "Сообщение" })
+                @Html.ValidationMessageFor(m => m.TextBody)
+            </div>
+            <input type="submit" value="Отправить" class="bnt btn-info"/>
+        }
+    </div>
+</div>

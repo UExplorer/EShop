@@ -1,0 +1,138 @@
+﻿@using EShop.Domain.Entities
+@model EShop.Domain.Entities.Goods
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string img = $"~/Content/Img/{Model.Pictrure}";
+}
+
+<div class="container col-12">
+    <div class="row justify-content-center">
+        <div class="pictire col-5">
+            <img src=@Url.Content(img) alt="Card image cap" width="100%"/>
+        </div>
+        <div class="col-6" style="margin-left: 50px;">
+            @if (TempData["UserMess"] != null)
+            {
+                <h2>@TempData["UserMess"].ToString()</h2>
+                TempData["UserMess"] = null;
+            }
+
+            <div class="input-group">
+                @Html.DisplayNameFor(m => m.AvailableCount)
+                @Html.DisplayFor(m => m.AvailableCount)
+            </div>
+            <div class="input-group">
+                @Html.DisplayNameFor(m => m.Description)
+                @Html.DisplayFor(m => m.Description)
+            </div>
+
+            <table class="table" style="margin-top: 50px;">
+                <tbody>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Name)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(m => m.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Category)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(m => m.Category.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Color)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(m => m.Color)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Габариты
+                    </th>
+                    <td>
+                        @Html.Display($"{Model.Length}x{Model.Width}x{Model.Height}")
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Price)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(m => m.Price)
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            @if (Model.AvailableCount > 0)
+            {
+                using (Html.BeginForm("Add", "Cart", FormMethod.Post))
+                {
+                    @Html.Hidden("id", Model.Id)
+                    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                    <input type="submit" class="btn btn-primary" value="Купить"/>
+                }
+            }
+            else
+            {
+                <a href="#" class="btn btn-danger">Товара нет в наличии</a>
+            }
+            @Html.ActionLink("Сравнить!", "Index", "GoodsComparator", new {id = Model.Id}, new {@class = "btn btn-danger"})
+        </div>
+    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="row offset-6 mt-4">
+            @using (Html.BeginForm("Add","Review",FormMethod.Post))
+            {
+                <input type="hidden" name="GoodsId" value="@Model.Id"/>
+                <div class="mb-3">
+                    <label>Ваше имя </label>
+                    <input type="text" name="Author"/>
+                </div>   
+                <div class="mb-3">
+                    <label>Отзыв </label>
+                    <input type="text" name="Text"/>
+                </div>
+                <div class="mb-3">
+                    <label>Оценка </label>
+                    <input id="Stars" type="range" name="Stars" min="1" max="5"/>
+                    <output for="Stars" onforminput="value = Stars.valueAsNumber;"></output>
+                </div>
+                <input type="submit" value="Отправить отзыв"/>
+            }
+        </div>
+    }
+    <div class="container">
+        @foreach (Review review in Model.Reviews)
+        {
+            <div class="row">
+                <div>
+                    @Html.DisplayNameFor(i=> review.Author)
+                    @Html.DisplayFor(i => review.Author)
+                </div>
+                <div>
+                    @Html.DisplayNameFor(i => review.DateTime)
+                    @Html.DisplayFor(i => review.DateTime)
+                </div>
+            </div>
+            <div>
+                @Html.DisplayNameFor(i=> review.Text)
+                @Html.DisplayFor(i => review.Text)
+            </div>
+            <div>
+                @Html.DisplayNameFor(i=> review.Stars)
+                @Html.DisplayFor(i => review.Stars)
+            </div>
+        }
+    </div>
+</div>

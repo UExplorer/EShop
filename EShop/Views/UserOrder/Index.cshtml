@@ -1,0 +1,71 @@
+﻿@using EShop.Domain.Entities
+@model IEnumerable<EShop.Domain.Entities.Order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered table-striped" style="margin-top: 40px;">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderCart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shipment)
+            </th>
+            <th>
+                @Html.DisplayName("Total coast")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model)
+{
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User)
+            </td>
+            <td>
+                @foreach (var cartLine in item.OrderCart)
+                {
+                    <p>@Html.DisplayFor(modelItem => cartLine.Goods.Name)<text> x </text>@Html.DisplayFor(c => cartLine.Quantity)<text>;</text></p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Shipment)
+            </td>
+            <td>
+                @{ var cart = new Cart(item.OrderCart).ComputeTotalValue();}
+                @Html.DisplayFor(c => cart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderStatus.Name)
+            </td>
+            <td>
+                @using (Html.BeginForm("Delete","UserProfile", FormMethod.Post))
+                {
+                    @Html.Hidden("Id", item.Id)
+                    <input type="submit" value="Delete" class="btn-primary"/>
+                }
+            </td>
+        </tr>
+    </tbody>
+                    }
+
+</table>

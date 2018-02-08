@@ -1,0 +1,67 @@
+﻿@using EShop.Domain.Entities
+@using Ninject.Infrastructure.Language
+@model IList<EShop.Areas.Administration.Models.AdminOrderModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administration/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(o => o[0].OrderCart)</th>
+                    <th>@Html.DisplayNameFor(o => o[0].User)</th>
+                    <th>@Html.DisplayNameFor(o => o[0].Date)</th>
+                    <th>@Html.DisplayNameFor(o => o[0].Shipment)</th>
+                    <th>@Html.DisplayNameFor(o => o[0].TotalCost)</th>
+                    <th>@Html.DisplayNameFor(o => o[0].OrderStatus)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+            {
+                    <tr>
+                        <td>
+                            @foreach (var cartLine in order.OrderCart)
+                            {
+                                <p>@Html.DisplayFor(c => cartLine.Goods.Name)<text> x </text>@Html.DisplayFor(c => cartLine.Quantity)<text>;</text></p>
+                            }
+                        </td>
+                        <td>@Html.DisplayFor(o => order.User)</td>
+                        <td>@Html.DisplayFor(o => order.Date)</td>
+                        <td>
+                            Address: @order.Shipment.Country, @order.Shipment.City, @order.Shipment.Address <br/>
+                            Reciver: @order.Shipment.Reciver <br />
+                            ZIP: @order.Shipment.ZIP
+                        </td>
+                        <td>
+                            @Html.DisplayFor(o => order.TotalCost)
+                        </td>
+                        <td>
+                            <div class="row justify-content-around">
+                                @using (Html.BeginForm("Index", "AdminOrder", FormMethod.Post, new { @class = "form-inline" }))
+                                {
+                                    var d = ViewBag.List as List<SelectListItem>;
+                                    d[order.OrderStatus - 1].Selected = true;
+                                    <div class="col-6 dropdown">
+                                        @Html.DropDownList("statusId", (d as IEnumerable<SelectListItem>), "Select any")
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="hidden" name="orderId" value="@order.OrderId.ToString()" />
+                                        <input type="submit" value="Edit " class="btn btn-primary" />
+                                    </div>
+                                     {  d[order.OrderStatus - 1].Selected = false;}
+                                    
+                                 }
+                             </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

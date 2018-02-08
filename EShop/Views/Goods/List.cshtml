@@ -1,0 +1,46 @@
+﻿@model EShop.Models.GoodsModel
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    @RenderPage("~/Views/Shared/_PartialSearch.cshtml");
+</div>
+<div class="row" id="results">
+    <div class="col-3">
+        @RenderPage("~/Views/Shared/_PartialFilters.cshtml")
+    </div>
+    <div class="row col-9">
+        @foreach (var p in @Model.Goods)
+        {
+            <div class="card col-3 offset-1" style="width: 18rem; margin-bottom: 20px; margin-top: 20px;">
+                <div class="card-body">
+                    <img class="card-img-top" src="~/Content/Img/No_image_available.png" alt="Card image cap" width="100%">
+                    <h5 class="card-title">@p.Name</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@p.Category.Name</h6>
+                    <p class="card-text">@p.Description</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">@p.Price.ToString("# грн")</li>
+                    </ul>
+                    <div class="row justify-content-around" style="margin-top: 20px; margin-bottom: 10px;">
+                        @Html.ActionLink("Подробнее", "Index", "Item", new {id = p.Id}, new {@class = "btn btn-primary"})
+                        @if (p.AvailableCount > 0)
+                        {
+                            using (Html.BeginForm("Add", "Cart", FormMethod.Post))
+                            {
+                                @Html.Hidden("id", p.Id)
+                                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                                <input type="submit" class="btn btn-primary" value="Купить"/>
+                            }
+                        }
+                        else
+                        {
+                            <a href="#" class="btn btn-danger">Нет в наличии</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

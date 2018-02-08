@@ -1,0 +1,22 @@
+﻿    <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+        @if (Context.User.Identity.IsAuthenticated == false)
+        {
+            <li class="nav-item active">
+                @Html.ActionLink("Login", "Index", "Login", new {Area = "Login"}, new {@class = "nav-link"})
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Register", "Index", "Register", new {Area = "Login"}, new {@class = "nav-link"})
+            </li>
+        }
+        else
+        {
+            <li class="nav-item active">
+
+                @Html.ActionLink("Profile", "Index", "UserProfile", new {Area = string.Empty}, new {@class = "nav-link"})
+           
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Singout", "SingOut", "Login", new { Area = "Login" }, new { @class = "nav-link" })
+            </li>
+        }
+    </ul>

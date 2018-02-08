@@ -1,0 +1,26 @@
+﻿@model EShop.Areas.Login.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container justify-content-center">
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.DisplayFor(m => m.Name, new {})
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Email)
+        @Html.DisplayFor(m => m.Email)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Password)
+        @Html.DisplayFor(m => m.Password)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.PhoneNumber)
+        @Html.DisplayFor(m => m.PhoneNumber)
+    </div>
+</div>
+

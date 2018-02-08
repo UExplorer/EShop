@@ -1,0 +1,76 @@
+﻿@model EShop.Models.GoodsModel
+
+@{
+    Layout = null;
+}
+<div class="container offset-1 mb-3"style="margin-top: 50px;">
+    <div class="row justify-content-center">
+        <a class="btn btn-primary col-5 mb-3" data-toggle="collapse" href="#collapseSort" role="button" aria-expanded="false" aria-controls="collapseSort">
+            Сортировка
+        </a>
+        <div class="collapse" id="collapseSort">
+            <div class="row justify-content-center">
+                Сортировать по имени:<hr/>
+                @Html.ActionLink(Model.Sort.RevName, "ListByName", "Goods", null, new {@class = "btn btn-primary col-5", style = "margin-bottom: 20px;"})
+            </div>
+            <div class="row justify-content-center">
+                Сортировать новизне:<hr/>
+                @Html.ActionLink(Model.Sort.RevId, "ListById", "Goods", null, new {@class = "btn btn-primary col-5", style = "margin-bottom: 20px;"})
+            </div>
+            <div class="row justify-content-center">
+                Сортировать по цене:<hr/>
+                @Html.ActionLink(Model.Sort.RevPrice, "ListByPrice", "Goods", null, new {@class = "btn btn-primary col-5", style = "margin-bottom: 20px;"})
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container offset-1">
+    <div class="row justify-content-center">
+        <a class="btn btn-primary col-5" data-toggle="collapse" href="#collapseFilter" role="button" aria-expanded="false" aria-controls="collapseFilter">
+            Задать фильтр
+        </a>
+        <div class="collapse" id="collapseFilter">
+
+
+            @using (Html.BeginForm("List", "Goods", FormMethod.Post))
+            {
+                <div class="input-group mb-3" style="margin-top: 20px;">
+                    @Html.TextBoxFor(m => m.Color, new { @class = "form-control", placeholder = "Введите цвет" })
+                </div>
+                <div class="row form-group mb-3">
+                    <div class="row col-12" style="margin-left: 20px;"> @Html.Label("Цена: ")</div>
+                    <div class="col-6">
+                        @Html.TextBoxFor(m => m.PriceLow, new { @class = "form-control", placeholder = "Min" })
+                    </div>
+
+                    <div class="col-6">
+                        @Html.TextBoxFor(m => m.PriceHight, new { @class = "form-control", placeholder = "Max" })
+                    </div>
+                </div>
+
+                <div class="row form-group mb-3">
+                    <div class="row col-12" style="margin-left: 20px;"> @Html.Label("Габариты: ")</div>
+                    <div class="col-4">
+                        @Html.TextBoxFor(m => m.Length, new { @class = "form-control", placeholder = "L" })
+                    </div>
+                    <div class="col-4">
+                        @Html.TextBoxFor(m => m.Height, new { @class = "form-control", placeholder = "W" })
+                    </div>
+                    <div class="col-4">
+                        @Html.TextBoxFor(m => m.Width, new { @class = "form-control", placeholder = "H" })
+                    </div>
+                </div>
+
+                <div class="dropdown mb-3" style="margin-top: 20px;">
+                   
+                    @{
+                        var d = ViewBag.Categories as IEnumerable<SelectListItem>;
+                        @Html.DropDownList("Category", d, "Select any")
+                    }
+                </div>
+
+                <input type="submit" value="Set filter" class="btn-default" />
+            }
+        </div>
+    </div>
+</div>

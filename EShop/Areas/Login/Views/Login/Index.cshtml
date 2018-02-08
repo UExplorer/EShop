@@ -1,0 +1,23 @@
+﻿@model EShop.Areas.Login.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Login/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="container col justify-content-center col-3" style="margin-top: 40px;">
+    @using (Html.BeginForm("Login","Login",FormMethod.Post))
+    {
+        @Html.HiddenFor(m=>m.ReturnUrl)
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.UserName)
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+                @Html.DisplayNameFor(model => model.Password)
+                @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+        </div>
+        <input type="submit" value="Login" class="btn btn-primary col-12"/>
+    }
+    @Html.ActionLink("Register", "Index", "Register", new { Area = "Login" }, new { @class="btn btn-primary col-12", style="margin-top: 10px;"})
+</div>

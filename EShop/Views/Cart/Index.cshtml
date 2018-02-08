@@ -1,0 +1,51 @@
+﻿@model EShop.Models.CartViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <table class="table table-bordered table-striped" style="margin-top: 50px;">
+        <thead>
+            <tr>
+                <th>Кол-во</th>
+                <th>Товар</th>
+                <th>Цена</th>
+                <th>Общая цена</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.Cart.Lines)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(l => line.Quantity)</td>
+                    <td>@Html.DisplayFor(l => line.Goods.Name)</td>
+                    <td>@Html.DisplayFor(l => line.Goods.Price)</td>
+                    <td>
+                        @((line.Quantity * line.Goods.Price))
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                        {
+                            @Html.Hidden("id", line.Goods.Id)
+                            <input class="btn btn-primary" type="submit" value="Удалить" />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Итого:</td>
+                <td>
+                    @Model.Cart.ComputeTotalValue().ToString("# грн")
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div>
+        <a class="btn btn-primary" href="@Model.ReturnUrl">Продолжить покупки</a>
+        @Html.ActionLink("Offer order", "Index", "Order")
+    </div>
+</div>

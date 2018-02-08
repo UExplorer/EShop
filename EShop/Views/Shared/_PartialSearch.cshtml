@@ -1,0 +1,17 @@
+﻿@using EShop.Models
+@model EShop.Models.GoodsModel
+@{
+    Layout = null;
+    Model.Sort = (SortModel) Session["Sort"];
+}
+
+<div class="container row bg-dark">
+    @using (Html.BeginForm("Search", "Goods", FormMethod.Post))
+    {
+        @Html.TextBoxFor(m => m.Name)
+        <input type="submit" value="Поиск" class="btn-default" />
+    }
+</div>
+
+<script src="~/Scripts/jquery-3.0.0.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

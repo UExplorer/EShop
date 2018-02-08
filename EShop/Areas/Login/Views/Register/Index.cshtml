@@ -1,0 +1,38 @@
+﻿@model EShop.Areas.Login.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Login/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="container col-3 justify-content-center">
+    @using (Html.BeginForm("CreateUser", "Register", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(r => r.Name, new {@class="col-form-label"})
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(r => r.Email, new { @class = "col-form-label" })
+            @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(r => r.Password, new { @class = "col-form-label" })
+            @Html.TextBoxFor(r => r.Password, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(r => r.PasswordConfirm, new { @class = "col-form-label" })
+            @Html.TextBoxFor(r => r.PasswordConfirm, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PasswordConfirm)
+        </div>
+
+        <div class="">
+        </div>
+
+        <input type="submit" value="Register" class="btn-primary"/>
+    }
+</div>
+<script src="~/scripts/jquery.validate.unobtrusive.js" type="text/javascript"></script>
