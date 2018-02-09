@@ -48,7 +48,7 @@ namespace EShop.Domain.Context
 
         public IEnumerable<Review> Reviews
         {
-            get { return context.Reviews; }
+            get { return context.Reviews.Include(c=>c.Goods); }
         }
 
         public void SaveGoods(Goods goods)

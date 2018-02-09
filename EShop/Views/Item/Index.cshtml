@@ -117,20 +117,19 @@
         {
             <div class="row">
                 <div>
-                    @Html.DisplayNameFor(i=> review.Author)
+                    Пользователь: 
                     @Html.DisplayFor(i => review.Author)
                 </div>
-                <div>
-                    @Html.DisplayNameFor(i => review.DateTime)
+                <div  class="offset-1 mb-3">
+                    Дата отзыва:
                     @Html.DisplayFor(i => review.DateTime)
                 </div>
             </div>
-            <div>
-                @Html.DisplayNameFor(i=> review.Text)
+            <div class="row bg-dark">
                 @Html.DisplayFor(i => review.Text)
             </div>
-            <div>
-                @Html.DisplayNameFor(i=> review.Stars)
+            <div class="row mt-2">
+                Оценка:
                 @Html.DisplayFor(i => review.Stars)
             </div>
         }

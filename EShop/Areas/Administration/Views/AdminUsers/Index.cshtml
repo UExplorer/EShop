@@ -30,8 +30,8 @@
                         }
                     </td>
                     <td>@Html.DisplayFor(u => user.PhoneNumber)</td>
-                    <td>@(user.IsEnabled ? "Yes" : "No")</td>
-                    <td>@Html.ActionLink("Disable/Enable", "Disable", "AdminUsers", new { id = user.Id }, new {@class= "btn btn-outline-primary" })</td>
+                    <td>@(user.IsEnabled ? "Разблокирован" : "Заблокирован")</td>
+                    <td>@Html.ActionLink("Заблокировать/Разблокировать", "Disable", "AdminUsers", new { id = user.Id }, new {@class= "btn btn-outline-primary" })</td>
                 </tr>
             }
         </tbody>

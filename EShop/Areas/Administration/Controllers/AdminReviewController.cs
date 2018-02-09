@@ -77,7 +77,6 @@ namespace EShop.Areas.Administration.Controllers
         [HttpPost]
         public void Reply(ReplyModel model)
         {
-
             SendMessage(model.From, model.User, model.Subject, model.TextBody);
         }
 
@@ -88,7 +87,7 @@ namespace EShop.Areas.Administration.Controllers
         public RedirectToRouteResult SendMessage(string From, string toUser, string subject, string body)
         {
             MailAddress from = new MailAddress(From);
-            MailAddress to = new MailAddress(toUser);
+            MailAddress to = new MailAddress($"{toUser}@gmail.com");
             MailMessage message = new MailMessage(from, to);
 
             message.Subject = subject;

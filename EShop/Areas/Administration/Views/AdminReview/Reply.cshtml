@@ -7,7 +7,7 @@
 
 <div class="container justify-content-center col col-4">
     <div class="" style="margin-top: 120px;">
-        @using (Html.BeginForm("SendMail", "Feedback", FormMethod.Post))
+        @using (Html.BeginForm("Reply", "AdminReview", FormMethod.Post))
         {
             <div class="input-group mb-4">
                 @Html.TextBoxFor(m=>m.From, new { @class = "form-control", placeholder = "От кого (ваш email)" })

@@ -156,7 +156,8 @@ namespace EShop.Domain.Context
                               "GPRS class 10, 2.0 TFT дисплей(128x160 pix, 65536 оттенков)",
                 AvailableCount = 7,
                 Price = 906,
-                Pictrure = "samsung-c3110.jpg"
+                Pictrure = "samsung-c3110.jpg",
+                Color = "Серебристый"
             });
             context.SaveChanges();
 

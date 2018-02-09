@@ -95,20 +95,19 @@ namespace EShop.Areas.Administration.Controllers
                     _repository.Goods.ToList().First(g => g.Id == model.Id).Pictrure != null)
                     model.PictrureName = _repository.Goods.ToList().First(g => g.Id == model.Id).Pictrure;
 
-                Goods goods = new Goods()
-                {
-                    Id = model.Id,
-                    AvailableCount = model.AvailableCount,
-                    Name = model.Name,
-                    CategoryId = model.CategoryId,
-                    Color = model.Color,
-                    Description = model.Description,
-                    Height = model.Height,
-                    Length = model.Length,
-                    Width = model.Width,
-                    Pictrure = model.PictrureName,
-                    Price = model.Price
-                };
+                if (model.AvailableCount < 0) model.AvailableCount = 0;
+
+                Goods goods = _repository.Goods.First(g => g.Id == model.Id);
+                goods.AvailableCount = model.AvailableCount;
+                goods.Name = model.Name;
+                goods.CategoryId = model.CategoryId;
+                goods.Color = model.Color;
+                goods.Description = model.Description;
+                goods.Height = model.Height;
+                goods.Length = model.Length;
+                goods.Width = model.Width;
+                goods.Pictrure = model.PictrureName;
+                goods.Price = model.Price;
 
                 // Saving current item and adding record to log file
                 _repository.SaveGoods(goods);
@@ -118,6 +117,7 @@ namespace EShop.Areas.Administration.Controllers
             }
             else
             {
+                model.PictrureName = _repository.Goods.First(g => g.Id == model.Id).Pictrure;
                 return View(model);
             }
         }

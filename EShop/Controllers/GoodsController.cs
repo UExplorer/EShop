@@ -155,6 +155,7 @@ namespace EShop.Controllers
         /// <returns></returns>
         public List<Goods> Filters(GoodsModel model)
         {
+            var colors = _repository.Goods.ToList();
             List<Goods> currFilter = _repository.Goods.Where(i => (model.Color == null || i.Color.ToUpper().Contains(model.Color.ToUpper()))
                                                                    && (i.Category.Id == model.Category || model.Category == null)
                                                                    && (i.Height == model.Height || model.Height == null)
