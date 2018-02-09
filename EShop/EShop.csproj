@@ -242,6 +242,7 @@
     <Compile Include="Areas\Administration\Models\AdminGoodsModel.cs" />
     <Compile Include="Areas\Administration\Models\AdminOrderModel.cs" />
     <Compile Include="Areas\Administration\Models\AdminUsersModel.cs" />
+    <Compile Include="Areas\Administration\Models\ReplyModel.cs" />
     <Compile Include="Areas\Login\Controllers\LoginController.cs" />
     <Compile Include="Areas\Login\Controllers\RegisterController.cs" />
     <Compile Include="Areas\Login\LoginAreaRegistration.cs" />

@@ -18,7 +18,7 @@ namespace EShop.Areas.Administration.Controllers
     /// <summary>
     /// Class for manipulating Users state. Available only for Users in Admin and Moderator Roles
     /// </summary>
-    [Authorize(Roles = "Admin,Moderator")]
+    [Authorize(Roles = "Admin, Moderator")]
     public class AdminUsersController : Controller
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();

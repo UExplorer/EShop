@@ -7,23 +7,37 @@
 }
 
 <div class="container mt-5">
-    @foreach (Review review in Model)
-    {
-        <div class="row">
-            @using (Html.BeginForm("DeleteReview", "AdminReview", FormMethod.Post))
+    <table class="table table-bordered">
+        <theader>
+            <tr>
+                <th>Пользователь</th>
+                <th>Дата</th>
+                <th>Отзыв</th>
+                <th>Товар</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </theader>
+        <tbody>
+            @foreach (Review review in Model)
             {
-                @Html.DisplayFor(r=> review.Author)
-                @Html.DisplayFor(r=> review.DateTime)
-                @Html.DisplayFor(r=> review.Text)
-                @Html.DisplayFor(r=> review.Goods.Name)
-                <input type="hidden" name="id" value="@review.Id"/>
-                <input type="submit" value="Удалить отзыв"/>
+                <tr>
+                    @using (Html.BeginForm("DeleteReview", "AdminReview", FormMethod.Post))
+                    {
+                        <td>@Html.DisplayFor(r => review.Author)</td>
+                        <td>@Html.DisplayFor(r => review.DateTime)</td>
+                        <td> @Html.DisplayFor(r => review.Text)</td>
+                        <td>@Html.DisplayFor(r => review.Goods.Name)</td>
+                        <input type="hidden" name="id" value="@review.Id" />
+                        <td><input type="submit" value="Удалить отзыв" /></td>
+                    }
+                    @using (Html.BeginForm("Reply", "AdminReview", FormMethod.Post))
+                    {
+                        <input type="hidden" name="userName" value="@review.Author" />
+                        <td><input type="submit" value="Ответить" /></td>
+                    }
+                </tr>
             }
-            @using (Html.BeginForm("Reply", "AdminReview", FormMethod.Post))
-            {
-                <input type="hidden" name="userName" value="@review.Author"/>
-                <input type="submit" value="Ответить"/>
-            }
-        </div>
-    }
+        </tbody>
+    </table>
 </div>

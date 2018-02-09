@@ -19,9 +19,9 @@
         <a class="navbar-brand offset-1" href="~/Goods/List">EShop</a>
         @Html.ActionLink("Корзина", "Index", "Cart", new { Area = string.Empty, returnUrl = Request.Url.PathAndQuery }, new{@class="navbar-brand offset-3"})
         @Html.ActionLink("Сравнить", "Compare", "GoodsComparator", new { Area = string.Empty, returnUrl = Request.Url.PathAndQuery }, new { @class = "navbar-brand" })
-        @if (Context.User.IsInRole("Admin"))
+        @if (Context.User.IsInRole("Admin")||Context.User.IsInRole("Moderator"))
         {
-            @Html.ActionLink("В админку", "Index", "AdminOrder", new {Area = "Administration"}, new { @class = "navbar-brand" });
+            @Html.ActionLink("В админку", "Index", "AdminUsers", new {Area = "Administration"}, new { @class = "navbar-brand" });
         }
         @RenderPage("_PartialLogin.cshtml")     
     </nav>
