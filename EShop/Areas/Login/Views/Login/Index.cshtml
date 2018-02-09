@@ -1,4 +1,5 @@
-﻿@model EShop.Areas.Login.Models.LoginViewModel
+﻿@using System.Text
+@model EShop.Areas.Login.Models.LoginViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -14,10 +15,18 @@
             @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
         </div>
         <div class="form-group">
-                @Html.DisplayNameFor(model => model.Password)
-                @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+            @Html.DisplayNameFor(model => model.Password)
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
         </div>
         <input type="submit" value="Login" class="btn btn-primary col-12"/>
     }
     @Html.ActionLink("Register", "Index", "Register", new { Area = "Login" }, new { @class="btn btn-primary col-12", style="margin-top: 10px;"})
 </div>
+
+<div class="row justify-content-center" style="height: 500px;">
+    <h2 style="margin-top: 100px;">@if(TempData["LoginError"]!=null) { @TempData["LoginError"]} </h2>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

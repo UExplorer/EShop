@@ -63,7 +63,7 @@ namespace EShop.Areas.Administration.Controllers
         /// <param name="id">Id of User from db</param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Disable(string id)
+        public RedirectToRouteResult Disable(string id)
         {
             manager = HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
             var changeEnable = manager.Users.First(u=>u.Id==id);
@@ -71,7 +71,7 @@ namespace EShop.Areas.Administration.Controllers
             manager.Update(changeEnable);
             logger.Info($"User {User.Identity.Name} have changed user's ({changeEnable.UserName}) state");
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
     }
 

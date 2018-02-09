@@ -37,7 +37,7 @@ namespace EShop.Domain.Context
     /// <summary>
     /// Initializer with defaul data for database
     /// </summary>
-    public class EshopDBInitializer : DropCreateDatabaseAlways<EFDbContext>
+    public class EshopDBInitializer : DropCreateDatabaseIfModelChanges<EFDbContext>
     {
         protected override void Seed(EFDbContext context)
         {
@@ -93,7 +93,8 @@ namespace EShop.Domain.Context
                               "многое другое поразительно улучшает качество использования вами нового смартфона.",
                 AvailableCount = 0,
                 Price = 4000,
-                Pictrure = "MeizuM2Note.jpg"
+                Pictrure = "MeizuM2Note.jpg",
+                Color = "Серый, Синий, Черный"
             });
             context.Goods.Add(new Goods()
             {
@@ -103,7 +104,8 @@ namespace EShop.Domain.Context
                               "* изогнутый с двух сторон экран подчеркивает гармонию стиля и инноваций.",
                 AvailableCount = 10,
                 Price = 10000,
-                Pictrure = "SamsungS8.png"
+                Pictrure = "SamsungS8.png",
+                Color = "Черный, Белый"
             });
             context.Goods.Add(new Goods()
             {
@@ -116,7 +118,8 @@ namespace EShop.Domain.Context
                               "используйте телефон там, где другим устройствам это не под силу.",
                 AvailableCount = 5,
                 Price = 1300,
-                Pictrure = "nomi_i242.jpg"
+                Pictrure = "nomi_i242.jpg",
+                Color = "Черно-зеленый"
             });
             context.Goods.Add(new Goods()
             {
@@ -128,7 +131,8 @@ namespace EShop.Domain.Context
                               "образу своего обладателя, придавая уверенность и подчёркивая стиль и вкус.",
                 AvailableCount = 3,
                 Price = 1950,
-                Pictrure = "lg_g360_titan.jpg"
+                Pictrure = "lg_g360_titan.jpg",
+                Color = "Серый"
             });
             context.Goods.Add(new Goods()
             {
@@ -140,12 +144,13 @@ namespace EShop.Domain.Context
                               "удобно просматривать контент и читать сообщения.",
                 AvailableCount = 5,
                 Price = 699,
-                Pictrure = "Presigio.png"
+                Pictrure = "Presigio.png",
+                Color = "Красный"
             });
             context.Goods.Add(new Goods()
             {
-                Name = "Prestigio Grace B1 1242 Duo Red",
-                CategoryId = 3,
+                Name = "Samsung GT-C3110",
+                CategoryId = 4,
                 Description = "Разработка бюджетного класса выполнена в форм-факторе слайдер. Из особенностей аппарата стоит отметить FM radio с " +
                               "возможностью записи, поддержку карт памяти стандарта microSDHC до 8 Gb. Спецификации: GSM 850/900/1800/1900, EDGE, " +
                               "GPRS class 10, 2.0 TFT дисплей(128x160 pix, 65536 оттенков)",
@@ -177,23 +182,34 @@ namespace EShop.Domain.Context
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var user = new AppUser()
             {
-                UserName = "Admin", Email = "test@gmail.com", IsEnabled = true
+                UserName = "Admin", Email = "test@gmail.com", IsEnabled = true, PhoneNumber = "+380952292872"
                    
             };
             userManager.Create(user,"1234567");
             userManager.AddToRole(user.Id, "Admin");
             context.SaveChanges();
 
+            // Test Moder
+            user = new AppUser() { UserName = "Moderator", Email = "Moder@moder.com", IsEnabled = true, PhoneNumber = "+380664421683" };
+            userManager.Create(user, "1234567");
+            userManager.AddToRole(user.Id, "Moderator");
+            context.SaveChanges();
+
             // Test User
-            user = new AppUser() { UserName = "Test", Email = "test@test.com", IsEnabled = true};
+            user = new AppUser() { UserName = "Test", Email = "test@test.com", IsEnabled = true, PhoneNumber = "+380664421197"};
             userManager.Create(user, "1234567");
             userManager.AddToRole(user.Id, "User");
+            context.SaveChanges();
+
+            context.CartLines.Add(new CartLine() {Goods = context.Goods.First(x => x.Id == 1), Quantity = 2});
+            context.CartLines.Add(new CartLine() { Goods = context.Goods.First(x => x.Id == 3), Quantity = 1 });
+            context.CartLines.Add(new CartLine() { Goods = context.Goods.First(x => x.Id == 5), Quantity = 1 });
             context.SaveChanges();
 
             context.Orders.Add(new Order()
             {
                 Date = DateTime.Now,
-                OrderCart = null,
+                OrderCart = new List<CartLine>(){context.CartLines.Find(1), context.CartLines.Find(2)},
                 OrderStatus = context.Statuses.Find(3),
                 User = user.UserName,
                 Shipment = context.Shipments.First()
@@ -201,7 +217,7 @@ namespace EShop.Domain.Context
             context.Orders.Add(new Order()
             {
                 Date = DateTime.Now,
-                OrderCart = null,
+                OrderCart = new List<CartLine>(){context.CartLines.Find(3)},
                 OrderStatus = context.Statuses.Find(1),
                 User = user.UserName,
                 Shipment = context.Shipments.First()

@@ -60,13 +60,13 @@ namespace EShop.Areas.Login.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "You are blocked for a while, please contact Administrator for details");
+                        TempData["LoginError"] = "You are blocked for a while, please contact Administrator for details";
                         return View(login);
                     }
                 }
             }
-            ModelState.AddModelError("", "Invalid username or password");
-            return View(login);
+            TempData["LoginError"]="Invalid username or password";
+            return View("Index",login);
         }
 
         /// <summary>

@@ -3,16 +3,10 @@
 @{
     ViewBag.Title = "Login";
     Layout = "~/Areas/Login/Views/Shared/_LoginLayout.cshtml";
-    var errors = ViewData.ModelState.Values.ToList();
-    var stringB = new StringBuilder();
-    for(int i=2; i<errors.Count; i++)
-    {
-        stringB.Append(errors[i].Errors[0].ErrorMessage);
-    }
 }
 
 <div class="row justify-content-center" style="height: 500px;">
-    <h2 style="margin-top: 100px;">@stringB.ToString() </h2>
+    <h2 style="margin-top: 100px;">@if(TempData["LoginError"]!=null) {@TempData["LoginError"] }</h2>
 </div>
 @Html.ActionLink("To List","List","Goods", new {Area=""}, new{})
 @Html.ActionLink("To login","Index","Login", new {Area ="Login"}, new{})

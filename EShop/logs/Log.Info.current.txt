@@ -55,3 +55,31 @@
 2018-02-09 02:30:58.6662 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Admin is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
 2018-02-09 02:31:09.8068 EShop.Areas.Administration.Controllers.AdminGoodsController.Edit Info: User Admin have changed Goods by id: 1  ActionMethodDispatcher.Execute => <no type>.lambda_method => AdminGoodsController.Edit
 2018-02-09 02:31:21.1695 EShop.Areas.Administration.Controllers.AdminGoodsController.Edit Info: User Admin have changed Goods by id: 1  ActionMethodDispatcher.Execute => <no type>.lambda_method => AdminGoodsController.Edit
+2018-02-09 07:58:20.7970 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-09 07:58:46.5575 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Admin is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-09 07:59:05.2135 EShop.Areas.Administration.Controllers.AdminGoodsController.Edit Info: User Admin have changed Goods by id: 1  ActionMethodDispatcher.Execute => <no type>.lambda_method => AdminGoodsController.Edit
+2018-02-09 07:59:09.9738 EShop.Areas.Administration.Controllers.AdminGoodsController.Edit Info: User Admin have changed Goods by id: 1  ActionMethodDispatcher.Execute => <no type>.lambda_method => AdminGoodsController.Edit
+2018-02-09 08:02:45.9041 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-09 08:16:04.9728 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-09 08:18:08.4879 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-09 08:22:29.4838 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-09 08:23:14.6974 EShop.Areas.Login.Controllers.RegisterController.CreateUser Info: New user (Budda) is reggistred  ActionMethodDispatcher.Execute => <no type>.lambda_method => RegisterController.CreateUser
+2018-02-09 08:24:33.3369 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-09 08:24:58.4954 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Admin is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-09 08:28:47.1434 EShop.Areas.Administration.Controllers.AdminGoodsController.Edit Info: User Admin have changed Goods by id: 1  ActionMethodDispatcher.Execute => <no type>.lambda_method => AdminGoodsController.Edit
+2018-02-09 08:29:36.8473 EShop.Areas.Login.Controllers.LoginController.SingOut Info: User Admin is SingOut  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.SingOut
+2018-02-09 08:33:51.5809 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-09 08:40:42.6274 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-09 08:43:21.7515 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-09 08:44:12.5064 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-09 08:49:52.0728 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-09 08:50:20.7234 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Admin is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-09 08:52:17.7611 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-09 08:53:06.9039 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Admin is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-09 08:53:14.9564 EShop.Areas.Administration.Controllers.AdminUsersController.Disable Info: User Admin have changed user's (Test) state  ActionMethodDispatcher.Execute => <no type>.lambda_method => AdminUsersController.Disable
+2018-02-09 08:55:15.9443 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-09 08:55:40.5107 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Admin is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-09 08:55:50.1603 EShop.Areas.Administration.Controllers.AdminUsersController.Disable Info: User Admin have changed user's (Test) state  ActionMethodDispatcher.Execute => <no type>.lambda_method => AdminUsersController.Disable
+2018-02-09 08:55:51.8384 EShop.Areas.Login.Controllers.LoginController.SingOut Info: User Admin is SingOut  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.SingOut
+2018-02-09 09:07:53.1056 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-09 09:08:20.0132 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Admin is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
