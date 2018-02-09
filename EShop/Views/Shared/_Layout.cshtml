@@ -38,15 +38,12 @@
         <div class="row">
             <div class="col l4 offset-l2 s12">
                 <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                    <li>@Html.ActionLink("Обратная связь", "Index", "Feedback")</li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="footer-copyright">
-        <div class="row">
-            @Html.ActionLink("Обратная связь","Index","Feedback")
-        </div>
         <div class="container">
             © @DateTime.Now.Year Nikita Samoilenko NNN
         </div>

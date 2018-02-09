@@ -1,0 +1,32 @@
+2018-02-08 17:21:42.4262 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 17:35:15.5487 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 17:35:34.2168 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Admin is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-08 17:35:36.3879 EShop.Areas.Login.Controllers.LoginController.SingOut Info: User Admin is SingOut  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.SingOut
+2018-02-08 17:35:41.3802 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Test is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-08 18:19:22.4891 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 18:24:19.3351 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Admin is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-08 18:41:55.0045 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 18:50:27.0017 EShop.Areas.Login.Controllers.LoginController.SingOut Info: User Admin is SingOut  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.SingOut
+2018-02-08 18:54:18.9430 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 18:57:38.6314 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Admin is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-08 19:01:57.9113 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 19:09:14.7373 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 19:10:43.5833 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 19:13:14.4050 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Test is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-08 19:17:52.9449 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 19:39:07.3148 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 19:46:25.0328 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 19:52:48.3687 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 19:53:48.1672 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Test is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-08 19:54:05.5742 EShop.Areas.Login.Controllers.LoginController.SingOut Info: User Test is SingOut  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.SingOut
+2018-02-08 19:54:10.3134 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Admin is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-08 20:06:04.2333 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 20:12:39.3969 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 20:16:46.0310 EShop.Areas.Login.Controllers.LoginController.SingOut Info: User Admin is SingOut  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.SingOut
+2018-02-08 20:16:51.5723 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Test is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-08 20:29:40.1372 EShop.MvcApplication.Application_Start Info: Application Start  RuntimeMethodInfo.UnsafeInvokeInternal => RuntimeMethodHandle.InvokeMethod => MvcApplication.Application_Start
+2018-02-08 20:30:41.5638 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Test is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-08 20:31:01.7049 EShop.Areas.Login.Controllers.LoginController.SingOut Info: User Test is SingOut  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.SingOut
+2018-02-08 20:31:06.1132 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Admin is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login
+2018-02-08 20:32:48.3000 EShop.Areas.Login.Controllers.LoginController.SingOut Info: User Admin is SingOut  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.SingOut
+2018-02-08 20:32:52.9783 EShop.Areas.Login.Controllers.LoginController.Login Info: User: Test is autorised  ActionMethodDispatcher.Execute => <no type>.lambda_method => LoginController.Login

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
-    @RenderPage("~/Views/Shared/_PartialSearch.cshtml");
+    @RenderPage("~/Views/Shared/_PartialSearch.cshtml")
 </div>
 <div class="row" id="results">
     <div class="col-3">
@@ -16,10 +16,11 @@
         {
             <div class="card col-3 offset-1" style="width: 18rem; margin-bottom: 20px; margin-top: 20px;">
                 <div class="card-body">
-                    <img class="card-img-top" src="~/Content/Img/No_image_available.png" alt="Card image cap" width="100%">
+                    @{string img = $"~/Content/Img/{p.Pictrure}";}
+                    <img class="card-img-top" src="@Url.Content(img)" alt="Card image cap" width="100%">
                     <h5 class="card-title">@p.Name</h5>
                     <h6 class="card-subtitle mb-2 text-muted">@p.Category.Name</h6>
-                    <p class="card-text">@p.Description</p>
+                    <p class="card-text">@p.Description.Substring(0, 50)...</p>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">@p.Price.ToString("# грн")</li>
                     </ul>
@@ -27,7 +28,7 @@
                         @Html.ActionLink("Подробнее", "Index", "Item", new {id = p.Id}, new {@class = "btn btn-primary"})
                         @if (p.AvailableCount > 0)
                         {
-                            using (Html.BeginForm("Add", "Cart", FormMethod.Post, new {@class="form-inline"}))
+                            using (Html.BeginForm("Add", "Cart", FormMethod.Post, new {@class = "form-inline"}))
                             {
                                 @Html.Hidden("id", p.Id)
                                 @Html.Hidden("returnUrl", Request.Url.PathAndQuery)

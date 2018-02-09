@@ -25,7 +25,7 @@ namespace EShop.Areas.Administration.Controllers
         public AdminGoodsController(IEshopRepository repo)
         {
             _repository = repo;
-            ViewBag.Categories = _repository.Categories.ToList();
+            ViewBag.Categories = GetCategories();
         }
 
         /// <summary>
@@ -81,12 +81,19 @@ namespace EShop.Areas.Administration.Controllers
                     // Get file name
                     string fileName = System.IO.Path.GetFileName(model.Picture.FileName);
                     // Saving to Content folder
-                    model.Picture.SaveAs(Server.MapPath("~/Content/" + fileName));
+                    model.Picture.SaveAs(Server.MapPath("~/Content/Img/" + fileName));
                     model.PictrureName = fileName;
                 }
 
                 // Set standart image for Goods without image
-                if (model.PictrureName == string.Empty) model.PictrureName = "No_image_available.png";
+                if (model.PictrureName == null
+                    && _repository.Goods.ToList().First(g => g.Id == model.Id).Pictrure == "No_image_available.png")
+
+                    model.PictrureName = "No_image_available.png";
+
+                if (model.PictrureName == null &&
+                    _repository.Goods.ToList().First(g => g.Id == model.Id).Pictrure != null)
+                    model.PictrureName = _repository.Goods.ToList().First(g => g.Id == model.Id).Pictrure;
 
                 Goods goods = new Goods()
                 {
@@ -135,6 +142,21 @@ namespace EShop.Areas.Administration.Controllers
             logger.Info($"User {User.Identity.Name} have deleted Goods with name: {_repository.Goods.First(g=>g.Id==Id).Name}");
             _repository.DeleteGoods(Id);
             return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Load Categories from db
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<SelectListItem> GetCategories()
+        {
+            return _repository.Categories.Select(
+                s => new SelectListItem
+                {
+                    Text = s.Name,
+                    Value = s.Id.ToString(),
+                    Disabled = false
+                }).ToList();
         }
     }
 }

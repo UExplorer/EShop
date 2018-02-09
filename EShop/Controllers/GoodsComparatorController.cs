@@ -116,5 +116,14 @@ namespace EShop.Controllers
                 return sess;
             }
         }
+
+        public ActionResult Compare()
+        {
+            CompareModel model = GetCompare();
+            if (model.Item1 != null && model.Item2 != null)
+                return View("Index", model);
+            TempData["UserMess"] = "Для сравнения не хватает предметов";
+            return RedirectToAction("List", "Goods");
+        }
     }
 }

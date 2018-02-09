@@ -26,7 +26,6 @@ namespace EShop.Areas.Administration.Models
         [Display(Name = "В наличии (шт)")]
         public int AvailableCount { get; set; }
 
-        [Required]
         [Display(Name = "Цвет")]
         public string Color { get; set; }
 

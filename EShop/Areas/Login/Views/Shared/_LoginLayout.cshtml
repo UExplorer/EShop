@@ -10,8 +10,8 @@
 <body>
 <div>
     <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-        <a class="navbar-brand" href="#">EShop</a>
-        @Html.ActionLink("Корзина", "Index", "Cart", new { Area = string.Empty, returnUrl = Request.Url.PathAndQuery }, new { @class = "navbar-brand" })
+        <a class="offset-1 navbar-brand" href="~/Goods/List">EShop</a>
+        @Html.ActionLink("Корзина", "Index", "Cart", new { Area = string.Empty, returnUrl = Request.Url.PathAndQuery }, new { @class = "navbar-brand offset-3" })
         @if (Context.User.IsInRole("Admin"))
         {
             @Html.ActionLink("To Admin", "Index", "AdminOrder", new { Area = "Administration" }, null);
@@ -25,15 +25,9 @@
 <footer class="fixed-bottom bg-faded">
     <div class="container">
         <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-            </div>
             <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
                 <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                    <li>@Html.ActionLink("Обратная связь", "Index", "Feedback")</li>
                 </ul>
             </div>
         </div>
