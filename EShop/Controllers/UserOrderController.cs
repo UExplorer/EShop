@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,16 +17,18 @@ namespace EShop.Controllers
     [Authorize(Roles = "Admin,Moderator,User")]
     public class UserOrderController : Controller
     {
-        private IEshopRepository _repository;
+        private IEshopRepository _goodsRepository;
+        private IOrderRepository _orderRepository;
 
         /// <summary>
         /// Connection to db
         /// </summary>
         /// <param name="repo"></param>
-        public UserOrderController(IEshopRepository repo)
+        public UserOrderController(IEshopRepository goodsRepo, IOrderRepository orderRepo)
         {
-            _repository = repo;
-            ViewBag.Categories = _repository.Categories.ToList();
+            _goodsRepository = goodsRepo;
+            _orderRepository = orderRepo;
+            ViewBag.Categories = _goodsRepository.GetCategories().ToList();
         }
 
         /// <summary>
@@ -36,9 +39,9 @@ namespace EShop.Controllers
         {
             // Arrange
             var currentUser = User.Identity.Name;
-            var orders = _repository.Orders.Where(o => o.User == currentUser).ToList();
-            var cartLines = _repository.CartLines.ToList();
-            var status = _repository.Statuses.ToList();
+            var orders = _orderRepository.GetOrders().Where(o => o.User == currentUser).ToList();
+            var cartLines = _orderRepository.GetCartLines().ToList();
+            var status = _orderRepository.GetStatuses().ToList();
 
             List<OrderViewModel> model = new List<OrderViewModel>();
             foreach (Order order in orders)
@@ -65,7 +68,7 @@ namespace EShop.Controllers
         [HttpPost]
         public RedirectToRouteResult Delete(int Id)
         {
-            _repository.DeleteOrder(Id);
+            _orderRepository.DeleteOrder(Id);
             return RedirectToAction("Index");
         }
     }

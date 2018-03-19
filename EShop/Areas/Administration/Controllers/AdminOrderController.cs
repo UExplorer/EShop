@@ -17,12 +17,12 @@ namespace EShop.Areas.Administration.Controllers
     public class AdminOrderController : Controller
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-        private IEshopRepository _repository;
+        private IOrderRepository _repository;
         
         /// <summary>
         /// Basic constuctor for current controller. Set connection with database and load Categories from it.
         /// </summary>
-        public AdminOrderController(IEshopRepository repo)
+        public AdminOrderController(IOrderRepository repo)
         {
             _repository = repo;
         }
@@ -34,9 +34,9 @@ namespace EShop.Areas.Administration.Controllers
         public ActionResult Index()
         {
             // upploading extra data for order from db
-            var statuses = _repository.Statuses.ToList();
-            var orders = _repository.Orders.ToList();
-            var cartLines = _repository.CartLines.ToList();
+            var statuses = _repository.GetStatuses().ToList();
+            var orders = _repository.GetOrders().ToList();
+            var cartLines = _repository.GetCartLines().ToList();
 
             List<AdminOrderModel> model = new List<AdminOrderModel>();
             foreach (var order in orders)
@@ -70,11 +70,11 @@ namespace EShop.Areas.Administration.Controllers
         [HttpPost]
         public RedirectToRouteResult ChangeStatus(int orderId, int statusId=1)
         { 
-            var status = _repository.Statuses.First(s=>s.Id == statusId);
-            var result = _repository.Orders.First(c => c.Id == orderId);
+            var status = _repository.GetStatuses().First(s=>s.Id == statusId);
+            var result = _repository.GetOrders().First(c => c.Id == orderId);
 
             result.OrderStatus = status;
-            _repository.SaveOrder(result);
+            _repository.EditOrder(result);
 
             logger.Info($"User {User.Identity.Name} have changed status of order by id: {orderId}");
 
@@ -87,7 +87,7 @@ namespace EShop.Areas.Administration.Controllers
         /// <returns>List for dropdown items</returns>
         private IEnumerable<SelectListItem> GetStatuses()
         {
-            return _repository.Statuses.Select(
+            return _repository.GetStatuses().Select(
                 s => new SelectListItem
                 {
                     Text = s.Name,

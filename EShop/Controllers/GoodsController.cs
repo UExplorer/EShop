@@ -66,7 +66,7 @@ namespace EShop.Controllers
             }
             else
             {
-                model.Goods = _repository.Goods
+                model.Goods = _repository.GetGoods()
                     .OrderBy(g => g.Id).ToList();
 
                 ReverseToModel(model, "Id");
@@ -142,7 +142,7 @@ namespace EShop.Controllers
             GetSort(model);
 
             ViewBag.Categories = GetCategories();
-            var list = _repository.Goods.Where(g => g.Name.ToUpper().Contains(model.Name.ToUpper())).ToList();
+            var list = _repository.GetGoods().Where(g => g.Name.ToUpper().Contains(model.Name.ToUpper())).ToList();
             model.Goods = list;
 
             return View("List", model);
@@ -155,8 +155,8 @@ namespace EShop.Controllers
         /// <returns></returns>
         public List<Goods> Filters(GoodsModel model)
         {
-            var colors = _repository.Goods.ToList();
-            List<Goods> currFilter = _repository.Goods.Where(i => (model.Color == null || i.Color.ToUpper().Contains(model.Color.ToUpper()))
+            var colors = _repository.GetGoods().ToList();
+            List<Goods> currFilter = _repository.GetGoods().Where(i => (model.Color == null || i.Color.ToUpper().Contains(model.Color.ToUpper()))
                                                                    && (i.Category.Id == model.Category || model.Category == null)
                                                                    && (i.Height == model.Height || model.Height == null)
                                                                    && (i.Width == model.Width || model.Width ==null)
@@ -235,7 +235,7 @@ namespace EShop.Controllers
         /// <returns></returns>
         private IEnumerable<SelectListItem> GetCategories()
         {
-            return _repository.Categories.Select(
+            return _repository.GetCategories().Select(
                 s => new SelectListItem
                 {
                     Text = s.Name,

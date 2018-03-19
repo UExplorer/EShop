@@ -16,34 +16,14 @@ namespace EShop.Domain.Context
     {
         EFDbContext context = new EFDbContext();
 
-        public IEnumerable<Goods> Goods
+        public IEnumerable<Goods> GetGoods()
         {
-            get { return context.Goods.Include(g=>g.Reviews); }
+           return context.Goods.Include(g=>g.Reviews); 
         }
 
-        public IEnumerable<Order> Orders
+        public IEnumerable<Category> GetCategories()
         {
-            get { return context.Orders.Include(o=>o.OrderCart).Include(o=>o.Shipment); }
-        }
-
-        public IEnumerable<Category> Categories
-        {
-            get { return context.Categories; }
-        }
-
-        public IEnumerable<CartLine> CartLines
-        {
-            get { return context.CartLines.Include(c=>c.Goods); }
-        }
-
-        public IEnumerable<Status> Statuses
-        {
-            get { return context.Statuses; }
-        }
-
-        public IEnumerable<Shipment> Shipments
-        {
-            get { return context.Shipments; }
+           return context.Categories;
         }
 
         public IEnumerable<Review> Reviews
@@ -51,43 +31,29 @@ namespace EShop.Domain.Context
             get { return context.Reviews.Include(c=>c.Goods); }
         }
 
-        public void SaveGoods(Goods goods)
+        public void EditGoods(Goods goods)
         {
-            if (goods.Id == 0)
-                context.Goods.Add(goods);
-            else
+            Goods dbEntry = context.Goods.Find(goods.Id);
+            if (dbEntry != null)
             {
-                Goods dbEntry = context.Goods.Find(goods.Id);
-                if (dbEntry != null)
-                {
-                    dbEntry.Name = goods.Name;
-                    dbEntry.Description = goods.Description;
-                    dbEntry.Price = goods.Price;
-                    dbEntry.Category = context.Categories.Find(goods.CategoryId) ?? context.Categories.Find(1);
-                    dbEntry.CartLines = goods.CartLines;
-                    dbEntry.Pictrure = goods.Pictrure;
-                    dbEntry.Price = goods.Price;
-                }
+                dbEntry.Name = goods.Name;
+                dbEntry.Description = goods.Description;
+                dbEntry.Price = goods.Price;
+                dbEntry.Category = context.Categories.Find(goods.CategoryId) ?? context.Categories.Find(1);
+                dbEntry.CartLines = goods.CartLines;
+                dbEntry.Pictrure = goods.Pictrure;
+                dbEntry.Price = goods.Price;
             }
             context.SaveChanges();
         }
 
-        public void SaveOrder(Order order)
+        public void AddGoods(Goods goods)
         {
-            if (order.Id == 0)
-                context.Orders.Add(order);
-            else
+            if (goods != null)
             {
-                Order dbEntry = context.Orders.Find(order.Id);
-                if (dbEntry != null)
-                {
-                    dbEntry.OrderStatus = order.OrderStatus;
-                    dbEntry.Shipment = new Shipment();
-                    dbEntry.OrderCart = order.OrderCart;
-                    dbEntry.User = order.User;
-                }
+                context.Goods.Add(goods);
+                context.SaveChanges();
             }
-            context.SaveChanges();
         }
 
         public void DeleteGoods(int id)
@@ -96,16 +62,6 @@ namespace EShop.Domain.Context
             if(dbEntry != null)
             {
                 context.Goods.Remove(dbEntry);
-                context.SaveChanges();
-            }
-        }
-
-        public void DeleteOrder(int id)
-        {
-            Order dbEntry = context.Orders.Find(id);
-            if (dbEntry != null)
-            {
-                context.Orders.Remove(dbEntry);
                 context.SaveChanges();
             }
         }

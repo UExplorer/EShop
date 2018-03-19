@@ -214,7 +214,8 @@ namespace EShop.Tests
         {
             // Arrange
             RegisterController register = new RegisterController();
-            RegisterModel model = new RegisterModel() { Email = "Abbcc@gsdf.com", Name = "Bromat", Password = "1234567", PasswordConfirm = "123" };
+            RegisterModel model = new RegisterModel() { Email = "Abbcc@gsdf.com", Name = "Bromat",
+                Password = "1234567", PasswordConfirm = "123", PhoneNumber = "+380991234567"};
             var validationResults = new List<ValidationResult>();
             var ctx = new ValidationContext(model, null, null);
 
@@ -230,7 +231,8 @@ namespace EShop.Tests
         {
             // Arrange
             RegisterController register = new RegisterController();
-            RegisterModel model = new RegisterModel() { Email = "Abbcc@gsdf.com", Name = "Bromat", Password = "1234567", PasswordConfirm = "1234567" };
+            RegisterModel model = new RegisterModel() { Email = "Abbcc@gsdf.com", Name = "Bromat", Password = "1234567",
+                PasswordConfirm = "1234567", PhoneNumber = "+380991234567"};
             var validationResults = new List<ValidationResult>();
             var ctx = new ValidationContext(model, null, null);
 
@@ -296,8 +298,5 @@ namespace EShop.Tests
             // Assert
             Assert.AreNotEqual(expected, result);
         }
-
-        [TestMethod]
-        public void 
     }
 }

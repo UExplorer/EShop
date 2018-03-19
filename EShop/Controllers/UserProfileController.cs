@@ -16,16 +16,18 @@ namespace EShop.Controllers
     /// </summary>
     public class UserProfileController : Controller
     {
-        private IEshopRepository _repository;
+        private IEshopRepository _goodsRepository;
+        private IOrderRepository _orderRepository;
 
         /// <summary>
         /// Set connection to db
         /// </summary>
         /// <param name="repo"></param>
-        public UserProfileController(IEshopRepository repo)
+        public UserProfileController(IEshopRepository goodsRepo, IOrderRepository orderRepo)
         {
-            _repository = repo;
-            ViewBag.Categories = _repository.Categories.ToList();
+            _goodsRepository = goodsRepo;
+            _orderRepository = orderRepo;
+            ViewBag.Categories = _goodsRepository.GetCategories().ToList();
         }
 
         /// <summary>
@@ -39,7 +41,7 @@ namespace EShop.Controllers
             var currUsName = HttpContext.GetOwinContext().Authentication.User.Identity.Name;
             var user = userManager.Users.FirstOrDefault(u =>
                 u.UserName == currUsName);
-            var shipment = _repository.Shipments.ToList();
+            var shipment = _orderRepository.GetShipments().ToList();
             RegisterModel model = new RegisterModel();
 
             // We should find our User ;)

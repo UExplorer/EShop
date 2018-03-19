@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="Context\EFDbContext.cs" />
     <Compile Include="Context\EFEshopRepository.cs" />
+    <Compile Include="Context\EFOrderRepository.cs" />
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\CartLine.cs" />
     <Compile Include="Entities\Category.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Identity\AppUser.cs" />
     <Compile Include="Identity\AppUserManager.cs" />
     <Compile Include="Interfaces\IEshopRepository.cs" />
+    <Compile Include="Interfaces\IOrderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

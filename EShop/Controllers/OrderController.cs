@@ -21,16 +21,18 @@ namespace EShop.Controllers
     public class OrderController : Controller
     {
         private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-        private IEshopRepository _repository;
+        private IEshopRepository _goodsRepository;
+        private IOrderRepository _orderRepository;
 
         /// <summary>
         /// Connection with db
         /// </summary>
         /// <param name="repo"></param>
-        public OrderController(IEshopRepository repo)
+        public OrderController(IEshopRepository goodsRepo, IOrderRepository orderRepo)
         {
-            _repository = repo;
-            ViewBag.Categories = _repository.Categories.ToList();
+            _goodsRepository = goodsRepo;
+            _orderRepository = orderRepo;
+            ViewBag.Categories = _goodsRepository.GetCategories().ToList();
         }
 
         /// <summary>
@@ -69,8 +71,8 @@ namespace EShop.Controllers
         public ActionResult CreateOrder(CreateOrderModel model)
         {
             // Arrange
-            var goods = _repository.Goods.ToList();
-            var status = _repository.Statuses.ToList();
+            var goods = _goodsRepository.GetGoods().ToList();
+            var status = _orderRepository.GetStatuses().ToList();
             var userName = HttpContext.User.Identity.Name;
             var user = HttpContext.GetOwinContext().GetUserManager<AppUserManager>()
                 .Users.FirstOrDefault(u => u.UserName == userName);
@@ -96,7 +98,7 @@ namespace EShop.Controllers
                 };
 
                 // Save order into db
-                _repository.SaveOrder(order);
+                _orderRepository.AddOrder(order);
                 // Send e-mail to admin
                 SendNotification(user);
                 // Clear Cart

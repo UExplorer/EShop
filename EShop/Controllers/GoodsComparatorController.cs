@@ -35,8 +35,8 @@ namespace EShop.Controllers
         {
             // Arrange
             CompareModel model = GetCompare();
-            var category = _repository.Categories.ToList();
-            var goods = _repository.Goods.First(g => g.Id==id);
+            var category = _repository.GetCategories().ToList();
+            var goods = _repository.GetGoods().First(g => g.Id==id);
             var url = string.Empty;
 
             if (Request.UrlReferrer != null) url = HttpContext.Request.UrlReferrer.AbsolutePath;
@@ -55,7 +55,7 @@ namespace EShop.Controllers
             {
                 if (model.Item2 == null) // second item is empty
                 {
-                    model.Item2 = _repository.Goods.FirstOrDefault(g=>g.CategoryId == goods.CategoryId);
+                    model.Item2 = _repository.GetGoods().FirstOrDefault(g=>g.CategoryId == goods.CategoryId);
                     Session["Compare"] = model;
                 }
                 else  // qq is full, so we need cant add more items

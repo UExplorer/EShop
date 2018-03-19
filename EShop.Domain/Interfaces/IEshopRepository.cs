@@ -11,32 +11,12 @@ namespace EShop.Domain.Interfaces
         /// <summary>
         /// returns all Goods from Goods table
         /// </summary>
-        IEnumerable<Goods> Goods { get; }
-        
+        IEnumerable<Goods> GetGoods();
+
         /// <summary>
         /// returns all Categories from Categories table
         /// </summary>
-        IEnumerable<Category> Categories { get; }
-
-        /// <summary>
-        /// returns all Orders from Orders table
-        /// </summary>
-        IEnumerable<Order> Orders { get; }
-
-        /// <summary>
-        /// returns all CartLines from CartLines table
-        /// </summary>
-        IEnumerable<CartLine> CartLines { get; }
-
-        /// <summary>
-        /// returns all Statuses from Statuses table
-        /// </summary>
-        IEnumerable<Status> Statuses { get; }
-
-        /// <summary>
-        /// returns all Shipments from Shipment table
-        /// </summary>
-        IEnumerable<Shipment> Shipments { get; }
+        IEnumerable<Category> GetCategories();
 
         /// <summary>
         /// returns all Reviews from Reviews table
@@ -44,28 +24,22 @@ namespace EShop.Domain.Interfaces
         IEnumerable<Review> Reviews { get; }
 
         /// <summary>
-        /// Saving new or modified Goods item into database
+        /// Saving new Goods item into database
         /// </summary>
         /// /// /// <param name="goods">Goods item for Goods table</param>
-        void SaveGoods(Goods goods);
+        void AddGoods(Goods goods);
 
         /// <summary>
-        /// Saving new or modified Order item into database
+        /// Saving modified Goods item into database
         /// </summary>
-        /// /// <param name="order">Order item for Order table</param>
-        void SaveOrder(Order order);
+        /// /// /// <param name="goods">Goods item for Goods table</param>
+        void EditGoods(Goods goods);
 
         /// <summary>
         /// Deleting Goods item by set id
         /// </summary>
         /// <param name="id">Id number in Goods table</param>
         void DeleteGoods(int id);
-
-        /// <summary>
-        /// Deleting Order item by set id
-        /// </summary>
-        /// <param name="id">Id number in Order table</param>
-        void DeleteOrder(int id);
 
         /// <summary>
         /// Adding new Review item to Reviews database

@@ -34,6 +34,7 @@ namespace EShop.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IEshopRepository>().To<EFEshopRepository>();
+            kernel.Bind<IOrderRepository>().To<EFOrderRepository>();
         }
     }
 }

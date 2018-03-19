@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,7 +24,23 @@ namespace EShop.Controllers
         public CartController(IEshopRepository repo)
         {
             _repository = repo;
-            ViewBag.Categories = _repository.Categories.ToList();
+            ViewBag.Categories = _repository.GetCategories().ToList();
+        }
+
+        public RedirectToRouteResult QuantityChange(bool type, int idCartLine)
+        {
+            CartLine cartL = GetCart().Lines.First(c => c.Id == idCartLine);
+            if (type)
+            {
+                cartL.Quantity -= 1;
+                if (cartL.Quantity < 0) cartL = null;
+            }
+            else
+            {
+                cartL.Quantity += 1;
+            }
+
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -50,7 +67,7 @@ namespace EShop.Controllers
         /// <returns></returns>
         public RedirectToRouteResult Add(int id, string returnUrl)
         {
-            Goods goods = _repository.Goods
+            Goods goods = _repository.GetGoods()
                 .FirstOrDefault(g => g.Id == id);
 
             if (goods != null)
@@ -68,7 +85,7 @@ namespace EShop.Controllers
         /// <returns></returns>
         public RedirectToRouteResult RemoveFromCart(int id, string returnUrl)
         {
-            Goods goods = _repository.Goods
+            Goods goods = _repository.GetGoods()
                 .FirstOrDefault(g => g.Id == id);
 
             if (goods != null)

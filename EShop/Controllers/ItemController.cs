@@ -25,7 +25,7 @@ namespace EShop.Controllers
         public ItemController(IEshopRepository repo)
         {
             _repository = repo;
-            ViewBag.Categories = _repository.Categories.ToList();
+            ViewBag.Categories = _repository.GetCategories().ToList();
         }
         
         /// <summary>
@@ -36,7 +36,7 @@ namespace EShop.Controllers
         [NullIdException]
         public ActionResult Index(int id)
         {
-            return View(_repository.Goods.Single(i=>i.Id == id));
+            return View(_repository.GetGoods().Single(i=>i.Id == id));
         }
     }
 }

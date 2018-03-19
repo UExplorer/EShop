@@ -47,7 +47,7 @@
                                     var d = ViewBag.List as List<SelectListItem>;
                                     d[order.OrderStatus - 1].Selected = true;
                                     <div class="col-6 dropdown">
-                                        @Html.DropDownList("statusId", (d as IEnumerable<SelectListItem>), "Select any")
+                                        @Html.DropDownList("statusId", (d as IEnumerable<SelectListItem>))
                                     </div>
                                     <div class="col-6">
                                         <input type="hidden" name="orderId" value="@order.OrderId.ToString()" />

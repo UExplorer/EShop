@@ -34,7 +34,7 @@ namespace EShop.Areas.Administration.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            return View(_repository.Goods.ToList());
+            return View(_repository.GetGoods().ToList());
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace EShop.Areas.Administration.Controllers
         /// <returns></returns>
         public ViewResult Edit(int id)
         {
-            Goods goods = _repository.Goods
+            Goods goods = _repository.GetGoods()
                 .FirstOrDefault(g => g.Id == id);
             AdminGoodsModel model = new AdminGoodsModel();
             if (goods != null)
@@ -87,17 +87,17 @@ namespace EShop.Areas.Administration.Controllers
 
                 // Set standart image for Goods without image
                 if (model.PictrureName == null
-                    && _repository.Goods.ToList().First(g => g.Id == model.Id).Pictrure == "No_image_available.png")
+                    && _repository.GetGoods().ToList().First(g => g.Id == model.Id).Pictrure == "No_image_available.png")
 
                     model.PictrureName = "No_image_available.png";
 
                 if (model.PictrureName == null &&
-                    _repository.Goods.ToList().First(g => g.Id == model.Id).Pictrure != null)
-                    model.PictrureName = _repository.Goods.ToList().First(g => g.Id == model.Id).Pictrure;
+                    _repository.GetGoods().ToList().First(g => g.Id == model.Id).Pictrure != null)
+                    model.PictrureName = _repository.GetGoods().ToList().First(g => g.Id == model.Id).Pictrure;
 
                 if (model.AvailableCount < 0) model.AvailableCount = 0;
 
-                Goods goods = _repository.Goods.First(g => g.Id == model.Id);
+                Goods goods = _repository.GetGoods().First(g => g.Id == model.Id);
                 goods.AvailableCount = model.AvailableCount;
                 goods.Name = model.Name;
                 goods.CategoryId = model.CategoryId;
@@ -110,14 +110,22 @@ namespace EShop.Areas.Administration.Controllers
                 goods.Price = model.Price;
 
                 // Saving current item and adding record to log file
-                _repository.SaveGoods(goods);
+                if (goods.Id != 0)
+                {
+                    _repository.EditGoods(goods);
+                }
+                else
+                {
+                    _repository.AddGoods(goods);
+                }
+
                 logger.Info($"User {User.Identity.Name} have changed Goods by id: {goods.Id}");
 
                 return RedirectToAction("Index");
             }
             else
             {
-                model.PictrureName = _repository.Goods.First(g => g.Id == model.Id).Pictrure;
+                model.PictrureName = _repository.GetGoods().First(g => g.Id == model.Id).Pictrure;
                 return View(model);
             }
         }
@@ -139,7 +147,7 @@ namespace EShop.Areas.Administration.Controllers
         [HttpPost]
         public ActionResult Delete(int Id)
         {
-            logger.Info($"User {User.Identity.Name} have deleted Goods with name: {_repository.Goods.First(g=>g.Id==Id).Name}");
+            logger.Info($"User {User.Identity.Name} have deleted Goods with name: {_repository.GetGoods().First(g=>g.Id==Id).Name}");
             _repository.DeleteGoods(Id);
             return RedirectToAction("Index");
         }
@@ -150,7 +158,7 @@ namespace EShop.Areas.Administration.Controllers
         /// <returns></returns>
         private IEnumerable<SelectListItem> GetCategories()
         {
-            return _repository.Categories.Select(
+            return _repository.GetCategories().Select(
                 s => new SelectListItem
                 {
                     Text = s.Name,
